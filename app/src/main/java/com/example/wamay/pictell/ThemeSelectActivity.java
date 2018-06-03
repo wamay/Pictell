@@ -1,8 +1,6 @@
 package com.example.wamay.pictell;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteCursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,14 +8,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.database.sqlite.SQLiteDatabase;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import android.util.Log;
 
 public class ThemeSelectActivity extends AppCompatActivity {
-
 
     private ArrayList<String> spinnerItems = new ArrayList<>();
     private ThemeModel model;
@@ -30,18 +26,16 @@ public class ThemeSelectActivity extends AppCompatActivity {
 
         //deleteDatabase("themes.DB");
 
+        //pickup categories from themeDB
         this.model = new ThemeModel(getApplicationContext());
-
         String sql = "select distinct category " +
                 "from themes";
         spinnerItems = this.model.searchData(sql,"category");
         spinnerItems.add(0,"すべてのカテゴリ");
 
-
+        //set categories in spinner items
         Spinner spinner = findViewById(R.id.spinnerCategories);
         final TextView showTheme = findViewById(R.id.showThemeText);
-
-        // ArrayAdapter
         ArrayAdapter<String> adapter
                 = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinnerItems);
@@ -50,22 +44,42 @@ public class ThemeSelectActivity extends AppCompatActivity {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            //spinnerのアイテムを選択された時の処理
+            //selected item of spinner
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Spinner spinner = (Spinner)parent;
                 myTheme.setMyCategory((String)spinner.getSelectedItem());
             }
 
-            //spinnerのアイテムが選択されなかった時の処理
+            //not selected item of spinner
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
 
-        Button generateTheme = findViewById(R.id.generateThemeButton);
+        //init theme
+        sql = "select theme " +
+                "from themes " +
+                "order by random() limit 1";
+        String selectTheme = model.searchData(sql,"theme").get(0);
+        myTheme.setMyTheme(selectTheme);
+        showTheme.setText(myTheme.getMyTheme());
+
+
+        //transition from this to playGameActivity
+        Button playGameButton = findViewById(R.id.playGameButton);
+        playGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //generate new theme
+        Button generateTheme = (Button)findViewById(R.id.generateThemeButton);
         generateTheme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +100,8 @@ public class ThemeSelectActivity extends AppCompatActivity {
                 showTheme.setText(myTheme.getMyTheme());
             }
         });
+
+
 
 
     }
