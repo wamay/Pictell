@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f9f1d5"
     tools:context=".ThemeSelectActivity">
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="348dp"
         android:layout_height="39dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="28dp"
         android:gravity="center_horizontal"
-        android:text="Please Select a Category"
-        android:textSize="28dp"
+        android:text="カテゴリーを選択してください"
+        android:textColor="#4a4a4a"
+        android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <Spinner
         android:id="@+id/spinnerCategories"
@@ -27,9 +29,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/frame_style"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -37,8 +40,8 @@
         android:id="@+id/generateThemeButton"
         android:layout_width="192dp"
         android:layout_height="77dp"
-        android:layout_marginTop="44dp"
-        android:text="generate theme"
+        android:layout_marginTop="24dp"
+        android:text="テーマ生成"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,12 +50,12 @@
     <TextView
         android:id="@+id/showThemeText"
         android:layout_width="306dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="48dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/frame_style"
         android:gravity="center"
-        android:textColor="#000000"
         android:text="ここにテーマが表示されます"
+        android:textColor="#4a4a4a"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,10 +65,32 @@
         android:id="@+id/playGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="52dp"
         android:text="OK"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showThemeText" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/theme_select_title" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="#4a4a4a"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
 </android.support.constraint.ConstraintLayout>

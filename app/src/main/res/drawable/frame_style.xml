@@ -3,7 +3,12 @@
 
     <!-- 枠線 -->
     <stroke
-        android:width="2dp"
-        android:color="#000000" />
+        android:width="4dp"
+
+        android:color="#f1696d"
+        />
+
+    <solid android:color="#ffffff" />
+
 
 </shape>

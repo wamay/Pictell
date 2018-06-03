@@ -19,6 +19,11 @@ public class ThemeSelectActivity extends AppCompatActivity {
     private ThemeModel model;
     private MyTheme myTheme = new MyTheme();
 
+    private String tempCategory = "すべてのカテゴリ";
+    private String tempTheme;
+    private String spinnerItem;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,7 @@ public class ThemeSelectActivity extends AppCompatActivity {
                 "from themes";
         spinnerItems = this.model.searchData(sql,"category");
         spinnerItems.add(0,"すべてのカテゴリ");
+
 
         //set categories in spinner items
         Spinner spinner = findViewById(R.id.spinnerCategories);
@@ -48,7 +54,7 @@ public class ThemeSelectActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Spinner spinner = (Spinner)parent;
-                myTheme.setMyCategory((String)spinner.getSelectedItem());
+                spinnerItem = (String)spinner.getSelectedItem();
             }
 
             //not selected item of spinner
@@ -62,20 +68,8 @@ public class ThemeSelectActivity extends AppCompatActivity {
         sql = "select theme " +
                 "from themes " +
                 "order by random() limit 1";
-        String selectTheme = model.searchData(sql,"theme").get(0);
-        myTheme.setMyTheme(selectTheme);
-        showTheme.setText(myTheme.getMyTheme());
-
-
-        //transition from this to playGameActivity
-        Button playGameButton = findViewById(R.id.playGameButton);
-        playGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
-                startActivity(intent);
-            }
-        });
+        tempTheme = model.searchData(sql,"theme").get(0);
+        showTheme.setText(tempTheme);
 
 
         //generate new theme
@@ -84,25 +78,36 @@ public class ThemeSelectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String sql;
-                if(myTheme.getMyCategory().equals("すべてのカテゴリ")){
+                if(spinnerItem.equals("すべてのカテゴリ")){
                     sql = "select theme " +
                             "from themes " +
                             "order by random() limit 1";
                 }else {
                     sql = "select theme " +
                             "from themes " +
-                            "where category = '" + myTheme.getMyCategory()  + "' " +
+                            "where category = '" + spinnerItem  + "' " +
                             "order by random() limit 1";
                 }
 
-                String selectTheme = model.searchData(sql,"theme").get(0);
-                myTheme.setMyTheme(selectTheme);
-                showTheme.setText(myTheme.getMyTheme());
+                tempCategory = spinnerItem;
+                tempTheme = model.searchData(sql,"theme").get(0);
+                showTheme.setText(tempTheme);
+
             }
         });
 
 
+        //transition from this to playGameActivity
+        Button playGameButton = findViewById(R.id.playGameButton);
+        playGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myTheme.setMyTheme(tempTheme);
+                myTheme.setMyCategory(tempCategory);
 
-
+                Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

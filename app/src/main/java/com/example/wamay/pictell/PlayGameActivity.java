@@ -1,7 +1,9 @@
 package com.example.wamay.pictell;
 
-import android.os.CountDownTimer;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,10 +26,14 @@ public class PlayGameActivity extends AppCompatActivity {
     private long restTime = 180;
     private boolean isWorkTimer = false;
 
+    AlertDialog.Builder alert;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
+
+        alert = new AlertDialog.Builder(this);
 
         timerText = findViewById(R.id.timerText);
         timerText.setText(dataFormat.format(restTime * period));
@@ -76,6 +82,27 @@ public class PlayGameActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button finishButton = findViewById(R.id.finishTimerButton);
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(restTime > 1) {
+                    handler.post(run);
+                    isWorkTimer = true;
+                    restTime = 1;
+                }
+            }
+        });
+
+        Button showAnswerButton = findViewById(R.id.showAnswerButton);
+        showAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), ShowAnswerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //1秒間隔で実行される処理
@@ -89,53 +116,18 @@ public class PlayGameActivity extends AppCompatActivity {
             if(restTime < 1){
                 handler.removeCallbacks(run);
                 timerText.setText(dataFormat.format(0));
+
+                alert.setMessage("タイマーが終了しました")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //dialogのボタンを押したときの処理
+                    }
+                });
+                alert.show();
+                //ToDo タイマー終了時に音を鳴らす処理を追加する
             }
         }
     };
 
-
-
-
-
-    /*
-
-
-    public class MyCountDownTimer extends CountDownTimer {
-
-        private long mRestTime = -1;
-        private boolean isWorkTimer = false;
-
-        public MyCountDownTimer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-            mRestTime = millisInFuture;
-        }
-
-        @Override
-        public void onFinish() {
-            // カウントダウン完了後に呼ばれる
-            timerText.setText("0");
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-
-            // インターバル(countDownInterval)毎に呼ばれる
-            timerText.setText(Long.toString(millisUntilFinished/1000/60)
-                    + ":" + Long.toString(millisUntilFinished/1000%60));
-            this.mRestTime--;
-        }
-
-        public long getRestTime(){
-            return this.mRestTime;
-        }
-
-        public boolean getIsWorkTimer(){
-            return this.isWorkTimer;
-        }
-
-        public void setIsWorkTimert(boolean b){
-            this.isWorkTimer = b;
-        }
-    }
-    */
 }
