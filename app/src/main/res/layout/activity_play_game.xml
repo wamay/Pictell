@@ -9,85 +9,96 @@
 
     <Button
         android:id="@+id/minusSecondButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="16dp"
-        android:text="-10秒"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTimerButton" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/circle_button_style_03"
+        android:text="-10"
+        app:layout_constraintEnd_toStartOf="@+id/startTimerButton"
+        app:layout_constraintTop_toBottomOf="@+id/timerText" />
 
     <Button
         android:id="@+id/plusSecondButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginTop="16dp"
-        android:text="+10秒"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stopTimerButton" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/circle_button_style_03"
+        android:text="+10"
+        app:layout_constraintStart_toEndOf="@+id/stopTimerButton"
+        app:layout_constraintTop_toBottomOf="@+id/timerText" />
 
     <TextView
         android:id="@+id/timerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_width="227dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/frame_style"
+        android:fontFamily="monospace"
         android:gravity="center"
-        android:text="00:00"
+        android:text="12:34"
         android:textColor="#000000"
         android:textSize="72sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/startTimerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginStart="80dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="24dp"
-        android:text="start"
+        android:background="@drawable/circle_button_style"
+        android:text="はじめ"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timerText" />
 
     <Button
         android:id="@+id/stopTimerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginRight="96dp"
         android:layout_marginTop="24dp"
-        android:text="stop"
+        android:background="@drawable/circle_button_style"
+        android:text="とめる"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timerText" />
 
     <Button
         android:id="@+id/finishTimerButton"
-        android:layout_width="116dp"
-        android:layout_height="51dp"
+        android:layout_width="150dp"
+        android:layout_height="42dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Finish！"
+        android:layout_marginTop="136dp"
+        android:background="#a9e346"
+        android:text="おわり！"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/minusSecondButton" />
+        app:layout_constraintTop_toBottomOf="@+id/timerText" />
 
     <Button
         android:id="@+id/showAnswerButton"
-        android:layout_width="98dp"
-        android:layout_height="77dp"
-        android:layout_marginBottom="40dp"
-        android:text="答え合わせ"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle_button_style"
+        android:text="こたえ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finishTimerButton"
+        app:layout_constraintVertical_bias="0.34" />
 
     <ImageView
         android:id="@+id/imageView4"

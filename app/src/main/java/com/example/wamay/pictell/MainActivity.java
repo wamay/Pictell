@@ -36,11 +36,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                /*
-                Toast themeListClickTest = Toast.makeText(MainActivity.this, "DBのテーマリストを見よう",Toast.LENGTH_LONG);
-                themeListClickTest.show();
-                */
+                Intent intent = new Intent(getApplication(),ThemeListActivity.class);
+                startActivity(intent);
             }
         });
     }

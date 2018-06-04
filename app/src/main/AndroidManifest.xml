@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".ThemeSelectActivity" />
         <activity android:name=".PlayGameActivity" />
-        <activity android:name=".ShowAnswerActivity"></activity>
+        <activity android:name=".ShowAnswerActivity" />
+        <activity android:name=".ThemeListActivity"></activity>
     </application>
 
 </manifest>
