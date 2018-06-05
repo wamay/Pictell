@@ -1,5 +1,6 @@
 package com.example.wamay.pictell;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,13 +24,17 @@ public class ThemeListActivity extends AppCompatActivity {
     ListView list;
     ArrayAdapter<String> listAdapter;
 
+    //getApplication()だとListViewの文字が白くなるので、
+    // thisを格納して、ListView作成時に使用します
+    Context thisContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_list);
 
         model = new ThemeModel(getApplicationContext());
-
+        thisContext = this;
 
         sql = "select distinct category " +
                 "from themes";
@@ -80,7 +85,7 @@ public class ThemeListActivity extends AppCompatActivity {
                         "from themes " +
                         "where category = '" + spinnerItem + "';";
                 listViewItems = model.searchData(sql,"theme");
-                listAdapter = new ArrayAdapter<>(getApplication(),
+                listAdapter = new ArrayAdapter<>(thisContext,
                         android.R.layout.simple_list_item_1, listViewItems);
                 list.setAdapter(listAdapter);
 
